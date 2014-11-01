@@ -1,0 +1,22 @@
+### 1. What is a simple graph?  
+    A simple graph has no self referencing edges, i.e. V = {v1, v2.. }
+    there does not exist an edge such that the set of edges E does not contain
+    an edge such as (v1, v1), (v2, v2) etc..
+
+
+### 2. What is a regular graph?  What is a complete graph?  Prove that a 
+   ### complete graph is regular.
+    a regular graph is a graph such that each vertex has the same degree.
+    A complete graph is a graph where each pair of vertices has an edge
+        connecting them. proof is in my notebook.
+
+### 3. What is a path?  What is a cycle?
+       a path is a sequence of edges that connect a sequence of vertices.j
+       a cycle is a sequnce of edges that connects a sequnce of vertices
+           starting and ending at the same vertex.
+
+### 4. What is a forest? What is a tree?  
+       a forest is a disjoint union of trees.  This means that it is a set
+       of trees that are not connected by any edges.  A tree is an undirected
+       graph in which any two vertices are connected by exactly one path.  In
+       other words, any connected graph without any simple cycles is a tree.
