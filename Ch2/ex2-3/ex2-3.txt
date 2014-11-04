@@ -1,0 +1,2 @@
+### 1. Write a method named 'add_regular_edges' that starts with an edgeless 
+    graph and adds edges so that every vertex has the same degree.
