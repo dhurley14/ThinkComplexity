@@ -142,6 +142,52 @@ class Graph(dict):
                 if vertex2 != vertex1:
                     self.add_edge(Edge(vertex1, vertex2))
 
+
+
+
+    def add_regular_edges(self,k):
+        n = list(self.vertices())
+        num_vertices = len(n)
+        if k < num_vertices and (num_vertices%2 == 0 or k%2 == 0):
+            print True
+            if k%2 == 0:
+                # k is even, ipso facto compute k=2m
+                m = k/2
+                for vertex_index in range(num_vertices):
+                    for i in range(m):
+                        old_vertex = n[vertex_index]
+                        try:
+                            new_vert = n[vertex_index+i]
+                            if old_vertex == new_vert:
+                                new_vert = n[vertex_index+i+1]
+                            print "new_vert: "+str(new_vert)
+
+                        except:
+                            new_vert = n[num_vertices - (vertex_index+i)]
+                            if old_vertex == new_vert:
+                                new_vert = n[num_vertices - (vertex_index+i+1)]
+                            print "new_vert: "+str(new_vert)
+
+                        print "adding edge from: " +str(n[vertex_index]) + " to " + str(new_vert)
+                        if self.get_edge(n[vertex_index],new_vert) == None and self.get_edge(new_vert,n[vertex_index]) == None and n[vertex_index] != new_vert:
+                            self.add_edge(Edge(n[vertex_index],new_vert))
+
+                        else:
+                            print "doing nothing.."
+                            
+                    
+
+
+            else:
+                # k is odd, compute k = 2m + 1
+                print "hi"
+                
+        else:
+            print "k is too big, or number of vertices / edges is not even.  Ugh."
+
+
+
+
 def main(script, *args):
     v = Vertex('v')
     a = Vertex('a')
