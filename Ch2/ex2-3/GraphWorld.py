@@ -195,6 +195,7 @@ def main(script, n='10', *args):
     # create a graph and a layout
     g = Graph(vs)
     g.add_all_edges()
+    print len(g.vertices()) == 10
     print len(g.edges()) == 45 # making sure it is a K10
     layout = CircleLayout(g)
 

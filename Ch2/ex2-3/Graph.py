@@ -93,8 +93,8 @@ class Graph(dict):
 
     def vertices(self):
         """ returns a list of vertices in a graph """
-
-        return set(self)
+        return self.keys() # changed this on February 22nd, 2015
+        #return set(self)
 
     def edges(self):
         """ returns a list of edges in a graph """
@@ -146,26 +146,37 @@ class Graph(dict):
 
 
     def add_regular_edges(self,k):
-        n = list(self.vertices())
+        n = self.vertices()
+        print n
         num_vertices = len(n)
+        print num_vertices
+        print k
         if k < num_vertices and (num_vertices%2 == 0 or k%2 == 0):
             print True
             if k%2 == 0:
                 # k is even, ipso facto compute k=2m
                 m = k/2
+                print "m: ",m
                 for vertex_index in range(num_vertices):
                     for i in range(m):
                         old_vertex = n[vertex_index]
+                        print "old vertex = ",str(old_vertex)
+                        # add +1 to i since it starts at 0..
                         try:
-                            new_vert = n[vertex_index+i]
+                            new_vert = n[vertex_index+i+1]
+                            print "new_vert before if in try.. ", str(new_vert)
                             if old_vertex == new_vert:
-                                new_vert = n[vertex_index+i+1]
+                                new_vert = n[vertex_index+i+2]
+                                print "new vert = old vert in try"
                             print "new_vert: "+str(new_vert)
 
                         except:
-                            new_vert = n[num_vertices - (vertex_index+i)]
+                            #new_vert = n[num_vertices - (vertex_index+i+1)] # try switching these around.. ?
+                            new_vert = n[(vertex_index+i+1) - num_vertices]
+                            print "new_vert before if in except.. ", str(new_vert)
                             if old_vertex == new_vert:
-                                new_vert = n[num_vertices - (vertex_index+i+1)]
+                                new_vert = n[(vertex_index+i+2) - num_vertices]
+                                print "new vert = old vert in except"
                             print "new_vert: "+str(new_vert)
 
                         print "adding edge from: " +str(n[vertex_index]) + " to " + str(new_vert)
@@ -180,7 +191,42 @@ class Graph(dict):
 
             else:
                 # k is odd, compute k = 2m + 1
-                print "hi"
+                m = (k-1)/2
+                print "m: ",m
+                for vertex_index in range(num_vertices):
+                    for i in range(m):
+                        old_vertex = n[vertex_index]
+                        print "old vertex = ",str(old_vertex)
+                        # add +1 to i since it starts at 0..
+                        try:
+                            new_vert = n[vertex_index+i+1]
+                            print "new_vert before if in try.. ", str(new_vert)
+                            if old_vertex == new_vert:
+                                new_vert = n[vertex_index+i+2]
+                                print "new vert = old vert in try"
+                            print "new_vert: "+str(new_vert)
+
+                        except:
+                            #new_vert = n[num_vertices - (vertex_index+i+1)] # try switching these around.. ?
+                            new_vert = n[(vertex_index+i+1) - num_vertices]
+                            print "new_vert before if in except.. ", str(new_vert)
+                            if old_vertex == new_vert:
+                                new_vert = n[(vertex_index+i+2) - num_vertices]
+                                print "new vert = old vert in except"
+                            print "new_vert: "+str(new_vert)
+
+                        print "adding edge from: " +str(n[vertex_index]) + " to " + str(new_vert)
+                        if self.get_edge(n[vertex_index],new_vert) == None and self.get_edge(new_vert,n[vertex_index]) == None and n[vertex_index] != new_vert:
+                            self.add_edge(Edge(n[vertex_index],new_vert))
+                            # add a vertex going from old vert to one directly across it.
+                            try:
+                                self.add_edge(Edge(n[vertex_index],n[vertex_index+((num_vertices)/2)]))
+                            except:
+                                self.add_edge(Edge(n[vertex_index],n[(vertex_index+((num_vertices)/2))-num_vertices]))
+
+                        else:
+                            print "doing nothing.."
+                #print "hi"
                 
         else:
             print "k is too big, or number of vertices / edges is not even.  Ugh."

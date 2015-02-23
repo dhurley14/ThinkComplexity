@@ -6,7 +6,7 @@ from Graph import Graph
 
 import GraphWorld as graphw
 
-def main(script, n='6', *args):
+def main(script, n='5', *args):
     # Construct our graph..
     # create n Vertices
     n = int(n)
@@ -16,7 +16,7 @@ def main(script, n='6', *args):
     # create a graph and a layout
     g = Graph(vs)
     #g.add_all_edges()
-    g.add_regular_edges(4)
+    g.add_regular_edges(2)
     #print len(g.edges()) == 45 # making sure it is a K10
     layout = graphw.CircleLayout(g)
 
